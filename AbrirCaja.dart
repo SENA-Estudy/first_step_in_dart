@@ -18,34 +18,41 @@ void main() {
     "rol": "mesero",
   };
 
+  // Valida las reglas de apertura en orden: caja ya abierta, base fuera de
+  // rango y rol no autorizado. Si todo está bien abre la caja y registra el
+  // movimiento. En todos los casos muestra el estado y los movimientos.
   void abrirCaja(usuario) {
     if (cajaAbierta == true) {
       print("Error: ya hay una caja abierta");
       print("Estado de la caja: ${cajaAbierta ? "ABIERTA" : "CERRADA"}");
+      print("Movimientos: $movimientos");
     } else if (baseInicial > baseMaxima || baseInicial < 0) {
       print(
         "Error: La base inicial no puede ser menor a cero ni mayor a la base máxima",
       );
       print("Estado de la caja: ${cajaAbierta ? "ABIERTA" : "CERRADA"}");
+      print("Movimientos: $movimientos");
     } else if (!rolesAutorizados.contains(usuario["rol"])) {
       print(
         "Error: El usuario ${usuario["name"]} no esta autorizado para abrir caja",
       );
       print("Estado de la caja: ${cajaAbierta ? "ABIERTA" : "CERRADA"}");
+      print("Movimientos: $movimientos");
     } else {
       cajaAbierta = true;
-      movimientos.add("APERTURA por Laura con base 200000");
+      movimientos.add("APERTURA por ${usuario["name"]} con base $baseInicial");
       print("Caja abierta por ${usuario["name"]} con una base de $baseInicial");
       print("Estado de la caja: ${cajaAbierta ? "ABIERTA" : "CERRADA"}");
-      print(movimientos.first);
+      print("Movimientos: $movimientos");
     }
   }
 
   // Usuario autorizado con todo funcionando.
   abrirCaja(usuarioLaura);
 
-  // Reiniciamos el estado de la caja para probar el rol distinto
+  // Reiniciamos el estado de la caja y los movimientos para probar el rol distinto
   cajaAbierta = false;
+  movimientos.clear();
   print("");
   print("Ejemplo usuario no autorizado:");
   abrirCaja(usuarioNoautorizado);
@@ -56,8 +63,16 @@ void main() {
   print("Ejemplo Base Inicial mayor a Base Máxima permitida");
   abrirCaja(usuarioLaura);
 
-  // Caja ya esta abierta
+  // BaseInicial negativa
+  baseInicial = -5000;
+  print("");
+  print("Ejemplo Base Inicial negativa");
+  abrirCaja(usuarioLaura);
+
+  // Caja ya esta abierta (se restablece la base para aislar el caso)
+  baseInicial = 200000;
   cajaAbierta = true;
   print("");
+  print("Ejemplo caja ya abierta");
   abrirCaja(usuarioLaura);
 }
