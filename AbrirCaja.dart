@@ -21,6 +21,7 @@ void main() {
   void abrirCaja(usuario) {
     if (cajaAbierta == true) {
       print("Error: ya hay una caja abierta");
+      print("Estado de la caja: ${cajaAbierta ? "ABIERTA" : "CERRADA"}");
     } else if (baseInicial > baseMaxima || baseInicial < 0) {
       print(
         "Error: La base inicial no puede ser menor a cero ni mayor a la base máxima",
@@ -55,5 +56,8 @@ void main() {
   print("Ejemplo Base Inicial mayor a Base Máxima permitida");
   abrirCaja(usuarioLaura);
 
-  //
+  // Caja ya esta abierta
+  cajaAbierta = true;
+  print("");
+  abrirCaja(usuarioLaura);
 }
