@@ -92,17 +92,17 @@ void main() {
 
   //Caso medioPago debito sin referencia
   print("");
-  print("Caso valor recibido 9000:");
+  print("Caso medioPago debito sin referencia:");
   registrarVenta(incluirPropina, "debito", referencia, valorRecibido);
 
   //Caso medioPago debito con referencia
   print("");
-  print("Caso valor recibido 9000:");
+  print("Caso medioPago debito con referencia:");
   registrarVenta(incluirPropina, "debito", "A-12345", valorRecibido);
 
     //Caso medioPago bitcoin
   print("");
-  print("Caso valor recibido 9000:");
+  print("Caso medioPago bitcoin:");
   registrarVenta(incluirPropina, "bitcoin", "A-12345", valorRecibido);
 }
 
